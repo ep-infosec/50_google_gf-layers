@@ -1,0 +1,37 @@
+---
+Checks: >
+  *,
+  -modernize-use-trailing-return-type,
+  -cppcoreguidelines-pro-type-vararg,
+  -cert-dcl50-cpp,
+  -hicpp-vararg,
+  -cppcoreguidelines-pro-type-union-access,
+  -cppcoreguidelines-pro-type-reinterpret-cast,
+  -cppcoreguidelines-pro-type-const-cast,
+  -cppcoreguidelines-macro-usage,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -hicpp-no-array-decay,
+  -fuchsia-default-arguments-calls,
+  -fuchsia-statically-constructed-objects,
+  -mpi-*,
+  -hicpp-signed-bitwise,
+
+# Some comments for the above:
+
+# Allow array (with a length) to decay to a pointer.
+# We will already be warned against using arrays, so decay will
+# probably only occur when we have no other choice.
+# -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+# -hicpp-no-array-decay,
+
+# We don't use MPI and some mpi-* checks appear to cause clang-tidy segfaults.
+# -mpi-*,
+
+# Too many false-positives!
+# -hicpp-signed-bitwise,
+
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*gf_layers.*|.*VkLayer_GF_.*'
+AnalyzeTemporaryDtors: false
+FormatStyle:     file
+...
